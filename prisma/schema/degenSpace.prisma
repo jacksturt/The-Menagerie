@@ -1,23 +1,26 @@
+// (every Reply is a kind of Flick)
 enum FlickType {
   ReFlick 
   PrimaryFlick
 }
 
 
-type FlickAnalytics {
-  views Int,
-  clicks Int,
-  profileVisits Int,
+model FlickAnalytics {
+  id String @id @default(cuid()) 
+  flickId String @unique
+  views Int
+  clicks Int
+  profileVisits Int
   impressions Int
 }
 
 // a Post -> Flicks ( I flicked )
 model Flick{ 
   id String @id @default(cuid())
-  userId String 
+  userId String @unique
   flickType FlickType @default(ReFlick)
   // if flicks are replies
-  parentFlickId String?
+  parentFlickId String? @unique
   flickData String
   // likes
   respectCount Int
@@ -25,16 +28,15 @@ model Flick{
   cloneCount Int
   // bookmarks
   dumpCount Int
-
-  flickAnalytics FlickAnalytics
  } 
  
 // User <-> ChadEngagement
 model ChadEngagement{
-  id @id @default(cuid())
-  flickId String
-  hasLiked Boolean
-  hasShared Boolean
+  id String @id @default(cuid())
+  flickId String @unique
+  hasRespected Boolean
+  hasCloned Boolean
+  hasDumped Boolean
 }
 
 

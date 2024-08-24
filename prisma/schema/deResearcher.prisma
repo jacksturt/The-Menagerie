@@ -1,4 +1,8 @@
-type ReviewMetaData {
+
+// Peer Review Data
+model ReviewMetaData {
+  id String @id @default(cuid())
+  peerReviewDataId String @unique
   authenticity Int
   qualityOfResearch Int
   potentialImpl Int
@@ -7,11 +11,36 @@ type ReviewMetaData {
 }
 
 
+// Actual research paper
+model ResearchRecord {
+  id String @id @default(cuid())
+  recordPubkey String @unique
+  picture String
+  recordHash String @unique
+  recordData String
+  publisherId String @unique
+  version Float @default(1)
+  accessFee Int
+}
 
+// Versioned research paper (to handle Updates and release these as new versions)
+model VersionedResearchRecord {
+  id String @id @default(cuid())
+  parentId String @unique
+  version Float
+  recordHash String
+  recordData String
+  changeLogs String
+}
+
+
+// Peer reviews
 model PeerReview{
   id String @id @default(cuid())
-  paperId String
-  peerId String
+  paperId String @unique
+  peerId String @unique
   reviewComments String
-  reviewMetaData ReviewMetaData
 }
+
+
+

@@ -1,6 +1,14 @@
+// user model
+// model Chad{
+//   // 
+// }
+
+
+
+// Certificates
 model Certificates{
-  id @id @default(cuid())
-  chadId String
+  id String @id @default(cuid())
+  chadId String @unique
   name String
   createdAt String
   updatedAt String?
