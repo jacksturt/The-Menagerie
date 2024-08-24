@@ -1,0 +1,17 @@
+type ReviewMetaData {
+  authenticity Int
+  qualityOfResearch Int
+  potentialImpl Int
+  domainKnowledge Int
+  accuracyOfResults Int
+}
+
+
+
+model PeerReview{
+  id String @id @default(cuid())
+  paperId String
+  peerId String
+  reviewComments String
+  reviewMetaData ReviewMetaData
+}

@@ -1,0 +1,10 @@
+model Certificates{
+  id @id @default(cuid())
+  chadId String
+  name String
+  createdAt String
+  updatedAt String?
+  description String
+  certificateLink String
+  certCompany String
+}
