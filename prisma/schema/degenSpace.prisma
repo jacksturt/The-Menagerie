@@ -1,0 +1,44 @@
+// Either a primary post or a reply (every Reply is a kind of Flick)
+enum FlickType {
+  ReFlick 
+  PrimaryFlick
+}
+
+
+// Analytics for a Flick
+model FlickAnalytics {
+  id String @id @default(cuid()) 
+  flickId String @unique
+  views Int
+  clicks Int
+  profileVisits Int
+  impressions Int
+}
+
+// a Post -> Flicks ( I flicked )
+model Flick{ 
+  id String @id @default(cuid())
+  userId String @unique
+  flickType FlickType @default(ReFlick)
+  // if flicks are replies
+  parentFlickId String? @unique
+  flickData String
+  // likes
+  respectCount Int
+  // reposts
+  cloneCount Int
+  // bookmarks
+  dumpCount Int
+ } 
+ 
+
+model UserEngagement{
+  id String @id @default(cuid())
+  flickId String @unique
+  hasRespected Boolean
+  hasCloned Boolean
+  hasDumped Boolean
+}
+
+
+
