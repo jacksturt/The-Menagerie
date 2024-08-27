@@ -1,0 +1,72 @@
+model Bounty {
+    id          String   @id @default(cuid())
+    userId      String
+    vaultId     String   @unique
+    title       String   @db.VarChar(100)
+    description String?
+    createdAt   DateTime @default(now())
+    creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+    reward      Int
+
+    applications BountyApplication[]
+    allowedDevs  User[]              @relation("AllowedDevs")
+    ratings      Rating[]
+    checkpoints  Checkpoint[]
+    vault        Vault               @relation(fields: [vaultId], references: [id])
+}
+
+model BountyApplication {
+    id       String @id @default(cuid())
+    bountyId String
+    userId   String
+    bounty   Bounty @relation(fields: [bountyId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime          @default(now())
+    applicant User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+    status    ApplicationStatus @default(Pending)
+}
+
+model Rating {
+    id       String   @id @default(cuid())
+    bounty   Bounty   @relation(fields: [bountyId], references: [id], onDelete: Cascade)
+    bountyId String
+    userId   String
+    ratedBy  User     @relation(fields: [userId], references: [id])
+    ratedAt  DateTime @default(now())
+    rating   Int
+    comment  String?
+}
+
+model Checkpoint {
+    id       String @id @default(cuid())
+    bounty   Bounty @relation(fields: [bountyId], references: [id])
+    bountyId String
+
+    title       String           @db.VarChar(100)
+    description String?
+    status      CheckpointStatus @default(NotStarted)
+    createdAt   DateTime         @default(now())
+    dueDate     DateTime
+    incentive   Int?
+}
+
+model Vault {
+    id        String   @id @default(cuid())
+    bounty    Bounty?
+    createdAt DateTime @default(now())
+    publicKey String   @unique
+    balance   Decimal
+    //payments  Payments[]
+}
+
+enum ApplicationStatus {
+    Pending
+    Accepted
+    Rejected
+}
+
+enum CheckpointStatus {
+    NotStarted
+    InProgress
+    Finished
+}
