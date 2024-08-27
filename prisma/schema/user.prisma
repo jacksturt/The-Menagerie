@@ -65,3 +65,4 @@ model VerificationRequest {
     createdAt DateTime @default(now())
     details   String?
 }
+

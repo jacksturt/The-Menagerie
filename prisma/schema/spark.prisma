@@ -1,0 +1,45 @@
+model Campaign {
+    id                  Int          @id @default(autoincrement()) // Auto-incrementing ID for the campaign
+    campaignSeed        Int // Seed value for the campaign
+    campaignDescription String // Description of the campaign
+    campaignPk          String // Public key for the campaign
+    creator             User         @relation(fields: [creatorId], references: [user_id]) // Reference to the creator from the User table
+    creatorId           Int
+    startedAt           DateTime     @default(now()) // DateTime when the campaign started
+    endingAt            DateTime // DateTime when the campaign ends
+    fundingGoal         Int // Funding goal for the campaign
+    finished            Boolean      @default(false) // Indicates whether the campaign is finished
+    backers             BackerData[] // Reference to the backers from the BackerData table
+    proposals           Proposal[] // Reference to proposals associated with the campaign
+}
+
+model Proposal {
+    id             Int          @id @default(autoincrement()) // Auto-incrementing ID for the proposal
+    proposalPda    String // PDA (Program Derived Address) for the proposal
+    votesFor       Int // Number of votes in favor of the proposal
+    votesAgainst   Int // Number of votes against the proposal
+    proposalPassed Boolean? // Optional field indicating if the proposal passed
+    voters         BackerData[] // Reference to the voters from the BackerData table
+    startedAt      DateTime     @default(now()) // DateTime when the proposal started
+    endingAt       DateTime // DateTime when the proposal ends
+    campaign       Campaign     @relation(fields: [campaignId], references: [campaignSeed]) // Reference to the associated campaign
+    campaignId     Int
+}
+
+model BackerData {
+    publicKey    String                @id
+    backedAmount Int
+    backerPdaPk  String                @unique
+    proposals    BackerDataProposals[]
+}
+
+model BackerDataProposals {
+    id          Int        @id @default(autoincrement())
+    publicKey   String
+    backerPdaPk String
+    votingPower Int?
+    voted       Boolean
+    backerData  BackerData @relation(fields: [publicKey, backerPdaPk], references: [publicKey, backerPdaPk])
+
+    @@unique([publicKey, backerPdaPk])
+}
