@@ -1,4 +1,3 @@
-
 // Necessary for Next auth
 model Account {
     id                       String  @id @default(cuid())
@@ -43,8 +42,13 @@ model User {
     verificationRequest   VerificationRequest? @relation()
     edits                 EntryRevision[]
     reviews               EntryReview[]
-}
 
+    //Fields needed for Solquest
+    bounties           Bounty[] //Bounties owned by User
+    bountyApplications BountyApplication[] //Bounties user has applied to
+    workingBounties    Bounty[]            @relation("AllowedDevs") //Bounties user can work on
+    bountyRatings      Rating[]
+}
 
 model VerificationToken {
     identifier String
