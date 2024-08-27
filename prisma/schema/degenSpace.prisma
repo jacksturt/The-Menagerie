@@ -1,10 +1,11 @@
-// (every Reply is a kind of Flick)
+// Either a primary post or a reply (every Reply is a kind of Flick)
 enum FlickType {
   ReFlick 
   PrimaryFlick
 }
 
 
+// Analytics for a Flick
 model FlickAnalytics {
   id String @id @default(cuid()) 
   flickId String @unique
@@ -30,8 +31,8 @@ model Flick{
   dumpCount Int
  } 
  
-// User <-> ChadEngagement
-model ChadEngagement{
+
+model UserEngagement{
   id String @id @default(cuid())
   flickId String @unique
   hasRespected Boolean
