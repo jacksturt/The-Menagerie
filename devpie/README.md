@@ -64,7 +64,11 @@ Instead, commits such as "git init" or "npx create-solana-dapp@latest" to produc
 
 3. DevPie is built for and targeted at a team of software developers and engineers for their contributions (and possibly Project Management if GitHub's Projects and boards are utilized for project management tasks (A more feature-rich PM platform is likely required here (jira, kanban, tools etc.))). However, this leave out the UI/Art & Design/Legal/PR/Advertising/PM/Executive teams (if they exist in your organization), mostly if not entirely unrepresented. Therefore, it is likely that a separate, tangential equity deal would need to be reached by the organization as a whole, where allocations for each of the afformentioned teams have been determined, and the outcome of the DevPie algorithm determines the developer equity as a smaller part of the enitre pie.
 
-For instance, an organization may determine that 50% of the overall pie goes to the developer team, and the DevPie algorithm then determines how that 50% (of the grand total), is allocated, but the other sectors/teams of the business/organization have their own base allocations that collectively equal the other 50% of the overall pie.
+For instance, artwork committed to a repository may show as only +1 line or +1 file committed, and may be incredibly valuable to the project, but not adequately represented by the aglorithm. Outside considerations for this form of contribution and resulting equity will be needed by the wider organization/team.
+
+An organization may determine that 50% of the overall pie goes to the developer team, and the DevPie algorithm then determines how that 50% (of the grand total), is allocated, but the other sectors/teams of the business/organization have their own base allocations that collectively equal the other 50% of the overall pie.
+
+4. The /commits endpoint does not adequately show all contributions, contributors, nor activity to a repository. If just the /commits endpoint is considered, then some people will be left out of the final pie. The /contributors and /activity endpoints and their data should be considered as well.
 
 ---
 
