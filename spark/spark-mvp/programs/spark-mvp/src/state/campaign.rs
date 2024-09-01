@@ -13,5 +13,12 @@ pub struct Campaign {
 }
 
 impl Campaign {
-    pub const SPACE: usize = 8 + 8 + 32 + 8 + 8 + 8 + 1;
+    pub const SPACE: usize = 
+        8 + // ACCOUNT DISCRIMINATOR
+        8 + // CAMPAIGN SEED
+        32 + // CREATOR
+        8 + // STARTED AT
+        8 + // ENDING AT
+        8 + // FUNDING GOAL
+        1; // FINISHED
 }

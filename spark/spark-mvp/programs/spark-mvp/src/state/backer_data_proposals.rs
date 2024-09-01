@@ -10,5 +10,9 @@ pub struct BackerDataProposals {
 }
 
 impl BackerDataProposals {
-    pub const SPACE: usize = 8 + 32 + 8 + 8 + 1;
+    pub const SPACE: usize = 
+        8 + // ACCOUNT DISCRIMINATOR
+        32 + // BACKER PK PROPOOSALS
+        8 + 8 + // <OPTION> VOTING POWER 
+        1; // VOTED
 }

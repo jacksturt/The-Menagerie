@@ -9,5 +9,8 @@ pub struct BackerData {
 }
 
 impl BackerData {
-    pub const SPACE: usize = 8 + 32 + 8;
+    pub const SPACE: usize = 
+        8 + // ACCOUNT DISCRIMINATOR
+        32 + // BACKER PK
+        8; // BACKER AMOUNT
 }
