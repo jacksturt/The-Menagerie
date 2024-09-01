@@ -1,7 +1,5 @@
-pub use state::*;
-
-use crate::state;
 use anchor_lang::prelude::*;
+
 #[account]
 pub struct Proposal {
     pub votes_for: u64,
@@ -11,8 +9,8 @@ pub struct Proposal {
     pub proposal_passed: Option<bool>,
 }
 
-impl Proposal {
-    pub const SPACE: usize = 
+impl Space for Proposal {
+    pub INIT_SPACE: usize = 
         8 + // ACCOUNT DISCRIMINATOR
         8 + // VOTES FOR
         8 + // VOTES AGAINST
