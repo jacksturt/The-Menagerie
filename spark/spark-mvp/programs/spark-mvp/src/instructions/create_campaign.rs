@@ -25,7 +25,7 @@ pub struct CreateCampaign<'info> {
 }
 
 pub fn handler(ctx: Context<CreateCampaign>, campaign_seed: u64, ending_at: i64, funding_goal: u64) -> Result<()> {
-    ctx.accounts.create_campaign(campaign_seed, ending_at, funding_goal)?;
+    ctx.accounts.create_campaign(campaign_seed, ending_at, funding_goal, &ctx.bumps)?;
 
     Ok(())
 }
@@ -36,6 +36,7 @@ impl<'info> CreateCampaign<'info> {
         campaign_seed: u64,
         ending_at: i64,
         funding_goal: u64,
+        bumps: &CreateCampaignBumps
     ) -> Result<()> {
         self.campaign.set_inner(Campaign {
             campaign_seed,
@@ -43,7 +44,8 @@ impl<'info> CreateCampaign<'info> {
             started_at: Clock::get()?.unix_timestamp,
             ending_at,
             funding_goal,
-            is_finished: false
+            is_finished: false,
+            campaign_bump: bumps.campaign,
         });
 
         Ok(())

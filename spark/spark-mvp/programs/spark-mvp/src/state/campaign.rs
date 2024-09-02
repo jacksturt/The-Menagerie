@@ -8,6 +8,7 @@ pub struct Campaign {
     pub ending_at: i64,
     pub funding_goal: u64,
     pub is_finished: bool,
+    pub campaign_bump: u8,
 }
 
 impl Space for Campaign {
@@ -18,5 +19,6 @@ impl Space for Campaign {
         8 + // STARTED AT
         8 + // ENDING AT
         8 + // FUNDING GOAL
-        1; // IS FINISHED
+        1 + // IS FINISHED
+        1; // CAMPAIGN BUMP 
 }

@@ -16,6 +16,6 @@ pub mod spark_mvp {
     use super::*;
 
     pub fn create_campaign(ctx: Context<CreateCampaign>, campaign_seed: u64, ending_at: i64, funding_goal: u64) -> Result<()> {
-        create_campaign::handler(campaign_seed, ending_at, funding_goal)?;
+        create_campaign::handler(ctx, campaign_seed, ending_at, funding_goal)
     }
 }
