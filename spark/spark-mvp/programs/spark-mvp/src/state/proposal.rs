@@ -7,14 +7,16 @@ pub struct Proposal {
     pub started_at: i64,
     pub ending_at: i64,
     pub proposal_passed: Option<bool>,
+    pub proposal_bump: u8,
 }
 
 impl Space for Proposal {
-    pub INIT_SPACE: usize = 
+    const INIT_SPACE: usize = 
         8 + // ACCOUNT DISCRIMINATOR
         8 + // VOTES FOR
         8 + // VOTES AGAINST
         8 + // STARTED AT
         8 + // ENDING AT
-        1;  // PROPOSAL PASSED
+        1 + // PROPOSAL PASSED
+        1;  // PROPOSAL BUMP
 }

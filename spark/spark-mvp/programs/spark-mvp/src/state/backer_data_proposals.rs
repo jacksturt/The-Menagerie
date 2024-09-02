@@ -8,7 +8,7 @@ pub struct BackerDataProposals {
 }
 
 impl Space for BackerDataProposals {
-    pub INIT_SPACE: usize = 
+    const INIT_SPACE: usize = 
         8 + // ACCOUNT DISCRIMINATOR
         32 + // BACKER PK PROPOOSALS
         8 + 8 + // <OPTION> VOTING POWER 
