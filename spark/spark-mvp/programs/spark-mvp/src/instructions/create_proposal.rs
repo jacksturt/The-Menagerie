@@ -35,13 +35,13 @@ pub struct CreateProposal<'info> {
     pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<CreateProposal>, ending_at: i64) -> Result<()>{
+/*pub fn handler(ctx: Context<CreateProposal>, ending_at: i64) -> Result<()> {
     ctx.accounts.create_proposal(ending_at, &ctx.bumps)?;
 
     Ok(())
-}
+}*/
 
-impl<'info> CreateProposal<'info>{
+impl<'info> CreateProposal<'info> {
     pub fn create_proposal(&mut self, ending_at: i64, bumps: &CreateProposalBumps) -> Result<()> {
         self.proposal.set_inner(Proposal {
             votes_for: 0,

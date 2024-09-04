@@ -24,11 +24,17 @@ pub struct CreateCampaign<'info> {
     pub system_program: Program<'info, System>,
 }
 
-pub fn handler(ctx: Context<CreateCampaign>, campaign_seed: u64, ending_at: i64, funding_goal: u64) -> Result<()> {
-    ctx.accounts.create_campaign(campaign_seed, ending_at, funding_goal, &ctx.bumps)?;
+/*pub fn handler(
+    ctx: Context<CreateCampaign>,
+    campaign_seed: u64,
+    ending_at: i64,
+    funding_goal: u64,
+) -> Result<()> {
+    ctx.accounts
+        .create_campaign(campaign_seed, ending_at, funding_goal, &ctx.bumps)?;
 
     Ok(())
-}
+}*/
 
 impl<'info> CreateCampaign<'info> {
     pub fn create_campaign(
@@ -36,7 +42,7 @@ impl<'info> CreateCampaign<'info> {
         campaign_seed: u64,
         ending_at: i64,
         funding_goal: u64,
-        bumps: &CreateCampaignBumps
+        bumps: &CreateCampaignBumps,
     ) -> Result<()> {
         self.campaign.set_inner(Campaign {
             campaign_seed,
