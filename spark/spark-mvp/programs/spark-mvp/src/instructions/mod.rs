@@ -3,3 +3,6 @@ pub use create_campaign::*;
 
 pub mod create_proposal;
 pub use create_proposal::*;
+
+pub mod pledge;
+pub use pledge::*;
