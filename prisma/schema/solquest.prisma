@@ -3,6 +3,7 @@ model Bounty {
     userId      String
     vaultId     String   @unique
     title       String   @db.VarChar(100)
+    track       String   @db.VarChar(50)
     description String?
     createdAt   DateTime @default(now())
     creator     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
