@@ -38,6 +38,11 @@ pub struct Pledge<'info> {
 impl<'info> Pledge<'info> {
     pub fn pledge(&mut self, pledge_amount: u64) -> Result<()> {
         require!(pledge_amount > 0, SparkError::PledgeAmountZero);
+        require!(
+            Clock::get()?.unix_timestamp < self.campaign.ending_at,
+            SparkError::CampaignHasFinished
+        );
+
         let cpi_program = self.system_program.to_account_info();
 
         let cpi_accounts = Transfer {

@@ -6,3 +6,6 @@ pub use create_proposal::*;
 
 pub mod pledge;
 pub use pledge::*;
+
+pub mod withdraw;
+pub use withdraw::*;

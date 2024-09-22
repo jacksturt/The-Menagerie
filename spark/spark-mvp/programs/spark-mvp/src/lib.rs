@@ -28,4 +28,12 @@ pub mod spark_mvp {
     pub fn create_proposal(ctx: Context<CreateProposal>, ending_at: i64) -> Result<()> {
         ctx.accounts.create_proposal(ending_at, &ctx.bumps)
     }
+
+    pub fn pledge(ctx: Context<Pledge>, pledge_amount: u64) -> Result<()> {
+        ctx.accounts.pledge(pledge_amount)
+    }
+
+    pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
+        ctx.accounts.withdraw()
+    }
 }
