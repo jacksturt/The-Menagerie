@@ -1,10 +1,11 @@
-use crate::error::SparkError;
-use crate::state::Campaign;
 use anchor_lang::solana_program::native_token::lamports_to_sol;
 use anchor_lang::{
     prelude::*,
     system_program::{transfer, Transfer},
 };
+
+use crate::error::SparkError;
+use crate::state::Campaign;
 
 #[derive(Accounts)]
 pub struct Withdraw<'info> {
@@ -24,16 +25,20 @@ pub struct Withdraw<'info> {
         bump = campaign.campaign_bump
     )]
     pub campaign: Account<'info, Campaign>,
+
     pub system_program: Program<'info, System>,
 }
 
 impl<'info> Withdraw<'info> {
     pub fn withdraw(&mut self) -> Result<()> {
+        // Check if the funding goal is met
         require!(
             lamports_to_sol(self.campaign.to_account_info().lamports())
                 >= self.campaign.funding_goal as f64,
             SparkError::CampaignFailedNotEnoughFunds
         );
+
+        // Check if the campaign is still ongoing
         require!(
             Clock::get()?.unix_timestamp > self.campaign.ending_at,
             SparkError::CampaignStillRunning
