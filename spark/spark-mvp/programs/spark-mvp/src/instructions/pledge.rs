@@ -66,7 +66,7 @@ impl<'info> Pledge<'info> {
             self.backer_data.set_inner(BackerData {
                 backer_pk: self.backer.key(),
                 backer_amount: pledge_amount,
-                backer_bump: bumps.backer_data,
+                backer_data_bump: bumps.backer_data,
             });
         } else {
             self.backer_data.backer_amount += pledge_amount;
