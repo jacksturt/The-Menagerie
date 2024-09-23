@@ -30,7 +30,7 @@ pub mod spark_mvp {
     }
 
     pub fn pledge(ctx: Context<Pledge>, pledge_amount: u64) -> Result<()> {
-        ctx.accounts.pledge(pledge_amount)
+        ctx.accounts.pledge(pledge_amount, &ctx.bumps)
     }
 
     pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
